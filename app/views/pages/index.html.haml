@@ -1,0 +1,53 @@
+%h1 Pages from book #{link_to @book.name, book_path(@book)} (#{@book.id})
+%div
+ %h3 Productions:
+ - @productions.each do |production|
+  %div
+   #{production.type || 'Production'}: #{production.state}
+
+= will_paginate
+%table
+ %tr
+  %th №
+  %th Id
+  %th Book
+  %th
+   %div created
+   %div updated
+  %th Doc
+  %th Text
+  %th View
+  %th Quote
+  %th Abbyy exception
+  %th Actions
+
+ - @pages.each do |page|
+  %tr{:class=>"#{cycle('even', 'odd')}"}
+   %td= link_to page.page_no.to_s, book_page_path(page.book, page)
+   %td #{page.id}
+   %td= link_to @book.name, book_path(@book)
+   %td
+    %div #{page.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+    %div #{page.updated_at.strftime("%Y-%m-%d %H:%M:%S")}
+   %td
+    - if page.doc_ready?
+     %div #{page.doc_ready_time.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+     %div #{page.doc_updated_at.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+   %td
+    - if page.text_ready?
+     %div #{page.text_ready_time.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+     %div #{page.text_updated_at.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+   %td
+    - if page.view_ready?
+     %div #{page.view_ready_time.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+     %div #{page.view_updated_at.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+   %td
+    - if page.quote_ready?
+     %div #{page.quote_ready_time.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+     %div #{page.quote_updated_at.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+   %td
+    - if page.exception?
+     %div #{page.exception_at.andand.strftime("%Y-%m-%d %H:%M:%S") or '---' }
+   %td
+= will_paginate
+

@@ -1,0 +1,4 @@
+development: localhost:6379
+test: localhost:6379
+production: production.ddc-media.ru:6379
+p2f: 192.168.225.3:6379

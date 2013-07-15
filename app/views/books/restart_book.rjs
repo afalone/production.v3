@@ -1,0 +1,2 @@
+page["books_table"].html(render :partial => "books/books_table", :locals => { :books => @books})
+page["#notice"].html(render(:text => "#{@book.name} sent to restart"))

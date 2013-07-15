@@ -1,0 +1,30 @@
+%div{:align => "center"}
+ %h1 Page #{@page.page_no} of #{link_to @page.book.name, book_path(@page.book)}
+.links{:align=>"center", :style=>"padding-bottom:20px;"}
+ - @links.each do |l|
+  %span{:style=>"padding:20px;"}= link_to_unless_current l[0], l[1] if l
+- if @page.confirmable?
+ - @page.book.productions.with_state(:confirmation_waiting).each do |production|
+  %div{:style=>"padding:15px;"}
+   = link_to production.type || "Production", production_path(production)
+   = button_to "Confirm", confirm_production_path(production), :method => :post
+.fast_pages{:align=>"center"}
+ - @fast_select_pages.each do |lpage|
+  %span{:style=>"padding:10px;"}= link_to_unless_current lpage.page_no.to_s, book_page_path(lpage.book, lpage)
+
+%table
+ %tr
+  %td
+   - if @flash
+    .column_flash
+     %object{:classid=>"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000", :width=>"700", :height=>"500", :codebase=>"http://active.macromedia.com/flash5/cabs/swflash.cab#version=8,0,0,0"}
+      %param{:name=>"MOVIE", :value=>"#{@flash}"}
+      %param{:name=>"PLAY", :value=>"true"}
+      %param{:name=>"LOOP", :value=>"true"}
+      %param{:name=>"QUALITY", :value=>"high"}
+      %embed{:src=>"#{@flash}", :width=>"700", :height=>"500", :play=>"true", :align=>"", :loop=>"true", :quality=>"high", :type=>"application/x-shockwave-flash", :pluginspage=>"http://www.macromedia.com/go/getflashplayer"}
+  %td
+   - if File.exist?("#{@page.full_path}.txt")
+    %textarea{:cols=>50, :rows=>30}= File.read("#{@page.full_path}.txt")
+   - else
+    %div No text file

@@ -1,0 +1,7 @@
+.selector
+ = link_to "In work", productions_path(:type=>"working")
+ = link_to "Confirmation waitng", productions_path(:type=>"confirm")
+ = link_to "Loaded", productions_path(:type=>"loaded")
+ = link_to "Publishing", productions_path(:type=>"publishing")
+ = link_to "Published", productions_path(:type=>"published")
+= render :partial => "productions/productions_table", :locals => {:productions => @productions}

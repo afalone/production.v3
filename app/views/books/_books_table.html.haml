@@ -1,0 +1,13 @@
+%table{:style => "width:100%;"}
+ %tr
+  %th Id
+  %th Name
+  %th Tasks count
+  %th Tasks
+  %th Pages count
+  %th! Ready pages<br />doc/text/view/quote
+  %th Preview pages
+  %th ДД
+ = render :partial => "books/book_row", :collection => books
+
+= will_paginate

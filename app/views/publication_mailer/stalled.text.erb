@@ -1,0 +1,4 @@
+Застряли <% @books.size %> книг:
+<% @books.each do |book| %>
+ <% book.book.name %> in <% book.state %> for <% Time.now - book.updated_at %>
+<% end %>

@@ -1,0 +1,17 @@
+%table{:style=>"width:100%"}
+ %tr
+  %th id
+  %th name
+  %th type
+  %th state
+  %th pages
+  %th doc
+  %th text
+  %th view
+  %th quote
+  %th created/updated
+  %th ДД
+
+ = render :partial => "productions/production_row", :collection => productions
+
+= will_paginate productions

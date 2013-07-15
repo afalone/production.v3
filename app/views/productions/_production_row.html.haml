@@ -1,0 +1,19 @@
+%tr{:class=>cycle('odd', 'even')}
+ %td= production_row.id
+ %td= link_to production_row.book.andand.name, book_path(production_row.book)
+ %td= production_row.type || 'Production'
+ %td= production_row.state || 'unknown state'
+ %td= production_row.book.andand.pages_count || "0"
+ %td= production_row.book.andand.doc_pages_count || '0'
+ %td= production_row.book.andand.text_pages_count || '0'
+ %td= production_row.book.andand.view_pages_count || '0'
+ %td= production_row.book.andand.quote_pages_count || '0'
+ %td
+  = production_row.created_at.strftime("%Y-%m-%d %H:%M:%S")
+  %br
+  = production_row.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+ %td
+  - if production_row.confirmation_waiting?
+   = link_to("просмотр", book_page_path(production_row.book.id, production_row.book.pages.order("page_no").first.id)) unless production_row.book.pages.empty?
+  = link_to "restart", restart_production_path(production_row)
+  = link_to "full restart", full_restart_production_path(production_row)

@@ -1,0 +1,17 @@
+%div{:align=>"center", :style=>"font-weight:bold;font-size:24px;"} Линии
+%table{:style=>"width:100%;"}
+ %tr
+  %th Id
+  %th Название
+  %th view
+  %th quote
+  %th Активность
+  %th ДД
+ - @lines.each do |line|
+  %tr{:class=>cycle("even", "odd")}
+   %td= line.id
+   %td= line.name
+   %td= line.can_view? ? "Да": "Нет"
+   %td= line.can_quote? ? "Да": "Нет"
+   %td= line.active? ? "Да": "Нет"
+   %td activate

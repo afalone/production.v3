@@ -1,0 +1,18 @@
+%tr{:class=>cycle('odd', 'even')}
+ %td= link_to book_row.id.to_s, book_path(book_row)
+ %td= link_to book_row.name, edit_book_path(book_row)
+ %td= link_to book_row.productions.count.to_s, book_productions_path(book_row)
+ %td
+  - book_row.productions.each do |prod|
+   %div= link_to (prod.type || 'Production'), production_path(prod)
+ %td= link_to (book_row.pages_count || 0).to_s, book_pages_path(book_row)
+ %td
+  - %w(doc text view quote).each do |str|
+   - p = book_row.send("#{str}_pages_count".to_sym) || 0
+   %div{:style=>"color:#{ p == book_row.pages_count ? "green" : p > (book_row.pages_count || 0) * 0.75 ? "blue" : :"red" };"}= p
+ %td
+  - %w(preview).each do |str|
+   - p = book_row.send("#{str}_pages_count".to_sym) || 0
+   %div{:style=>"color:#{ p == book_row.pages_count ? "green" : p > (book_row.pages_count || 0) * 0.75 ? "blue" : :"red" };"}= p
+ %td
+  = link_to "restart all", restart_book_book_path(book_row), :remote => true

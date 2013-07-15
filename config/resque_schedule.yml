@@ -1,0 +1,89 @@
+abbyy_feed:
+ cron: "*/2 * * * *"
+ class: AbbyyFeeder
+ queue: abbyy
+
+abbyy_fetch:
+ cron: "* * * * *"
+ class: AbbyyFetcher
+ queue: abbyy
+
+batch_scan:
+ cron: "*/7 * * * *"
+ class: BatchScaner
+ queue: batch
+
+pdc_feed:
+ cron: "*/3 * * * *"
+ class: PdcFeeder
+ queue: pdc
+
+pdf_start:
+ cron: "*/5 * * * *"
+ class: PdfPrintStart
+ queue: pdf
+
+production_start:
+ cron: "*/2 * * * *"
+ class: StartProduction
+ queue: batch
+
+preview_gen:
+ cron: "*/5 * * * *"
+ class: PreviewStep
+ queue: media
+
+cover_gen:
+ cron: "*/5 * * * *"
+ class: CoverStep
+ queue: media
+
+text_extract:
+ cron: "*/5 * * * *"
+ class: TextExtractStart
+ queue: abbyy
+
+confirm_sender:
+ cron: "*/2 * * * *"
+ class: ForConfirmSender
+ queue: prod
+
+auto_confirmer:
+ cron: "*/2 * * * *"
+ class: AutoConfirmer
+ queue: prod
+
+publisher:
+ cron: "*/5 * * * *"
+ class: PublishProcessIgniter
+ queue: publish
+
+#p2f_scan:
+# cron: "*/2 * * * *"
+# class: P2fScanIgniter
+# queue: p2f
+#
+#p2f_feed:
+# cron: "*/2 * * * *"
+# class: P2fLineFeeder
+# queue: p2f
+#
+#p2f_inline:
+# cron: "*/2 * * * *"
+# class: P2fLineSelector
+# queue: p2f
+#
+stalled:
+ cron: "42 */2 * * *"
+ class: StalledKicker
+ queue: batch
+
+restart_igniter:
+ cron: "*/15 * * * *"
+ class: RestartIgniter
+ queue: batch
+
+report_sender:
+ cron: "*/20 * * * *"
+ class: ReportSender
+ queue: prod

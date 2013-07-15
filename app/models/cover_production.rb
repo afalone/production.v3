@@ -1,0 +1,2 @@
+class CoverProduction < Production
+end
